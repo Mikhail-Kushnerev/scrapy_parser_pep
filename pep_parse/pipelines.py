@@ -5,11 +5,11 @@ from scrapy.exceptions import DropItem
 
 from constants import BASE_DIR, DT_FORMAT
 
+
 class PepParsePipeline:
 
     def open_spider(self, spider):
         self.status = {}
-        self.total: int = 0
 
     def process_item(self, item, spider):
         try:
@@ -20,11 +20,12 @@ class PepParsePipeline:
         else:
             key = item["status"]
             self.status[key] = self.status.get(key, 0) + 1
-            self.total += 1
         finally:
             return item
 
     def close_spider(self, spider):
+        total = 0
+
         results_dir = BASE_DIR / "results"
         results_dir.mkdir(exist_ok=True)
         now_time = dt.now().strftime(DT_FORMAT)
@@ -38,15 +39,17 @@ class PepParsePipeline:
             )
             writer.writeheader()
             for key in self.status:
+                count = self.status[key]
                 writer.writerow(
                     {
                         "Статус": key,
-                        "Колличество": self.status[key]
+                        "Колличество": count
                     }
                 )
+                total += count
             writer.writerow(
                 {
                     "Статус": "Total",
-                    "Колличество": self.total
+                    "Колличество": total
                 }
             )
