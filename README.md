@@ -82,25 +82,23 @@ scrapy_parser_pep
   </thead>
   <tbody>
     <tr>
-      <td>
+      <td align="center">
         Таблица №1
       </td>
-      <td>
+      <td align="center">
         Таблица №2
       </td>
     </tr>
     <tr>
       <td>
         <img
-          align="top"
           alt="table_№1"
-          width="40%"
+          width="80%"
           src="https://github.com/Mikhail-Kushnerev/image/blob/main/Parse_Scrapy/table_1.png"
         >
       </td>
       <td>
         <img
-          align="top"
           alt="table_№2"
           src="https://github.com/Mikhail-Kushnerev/image/blob/main/Parse_Scrapy/table_2.png"
         >
